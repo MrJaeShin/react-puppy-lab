@@ -7,20 +7,20 @@ import NavBar from "../../components/NavBar/NavBar";
 import "./App.css";
 
 function App() {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
   return (
     <main className="App">
       {user ? (
         <>
           <NavBar />
           <Switch>
-            <Route path="/puppies/new">
+            <Route path='/puppies/new'>
               <NewPuppyPage />
             </Route>
-            <Route path="/puppies">
+            <Route path='/puppies'>
               <PuppyHistoryPage />
             </Route>
-            <Redirect to="/puppies" />
+            <Redirect to='/puppies' />
           </Switch>
         </>
       ) : (
