@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function NavBar() {
+function NavBar({ user }) {
   return<nav>
     <Link to="/puppies">Puppies History</Link>
     &nbsp; | &nbsp;
