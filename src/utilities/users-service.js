@@ -3,6 +3,7 @@ import * as usersAPI from './users-api';
 export async function signUp(userData) {
 	try {
 		const token = await usersAPI.signUp(userData);
+		localStorage.setItem('token', token)
 		return token;
 	} catch {
 		throw new Error('Invalid Sign Up');
@@ -24,3 +25,4 @@ export function getUser() {
     const token = getToken();
     return token ? JSON.parse(atob(token.split('.')[1])).user: null;
 }
+
