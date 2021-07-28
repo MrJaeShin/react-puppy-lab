@@ -1,3 +1,4 @@
+import LogIn from '../components/LogInForm/LogInForm';
 import * as usersAPI from './users-api';
 
 export async function signUp(userData) {
@@ -28,4 +29,14 @@ export function getUser() {
 
 export function logOut() {
 	localStorage.removeItem('token')
+}
+
+export async function login(credentials) {
+	try {
+		const token = await usersAPI.login(credentials);
+		localStorage.setItem('token', token)
+		return getUser();
+	} catch {
+		throw new Error('Invalid Login');
+	}
 }
