@@ -2,6 +2,7 @@ import { getToken } from './users-service';
 const BASE_URL = '/api/users';
 
 export function signUp(userData) {
+	console.log(userData)
 	return sendRequest(BASE_URL, 'POST', userData);
 }
 
@@ -25,6 +26,7 @@ async function sendRequest(url, method = 'GET', payload = null) {
 		options.headers.Authorization = `Bearer ${token}`;
 	}
 	const res = await fetch(url, options);
+	console.log(token)
 	if (res.ok) return res.json();
 	throw new Error('Bad Request');
 }
