@@ -13,7 +13,7 @@ function App() {
     <main className="App">
       {user ? (
         <>
-          <NavBar />
+          <NavBar user={user} />
           <Switch>
             <Route path='/puppies/new'>
               <NewPuppyPage />
@@ -25,7 +25,7 @@ function App() {
           </Switch>
         </>
       ) : (
-        <AuthPage />
+        <AuthPage setUser={setUser} />
       )}
     </main>
   );
