@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { getUser } from '../../utilities/users-service';
 import AuthPage from "../AuthPage/AuthPage";
 import NewPuppyPage from "../NewPuppyPage/NewPuppyPage";
-import PuppyHistoryPage from "../PuppyHistoryPage/PuppyHistoryPage";
+import PuppyListPage from "../PuppyListPage/PuppyListPage";
 import NavBar from "../../components/NavBar/NavBar";
 import "./App.css";
 
@@ -19,7 +19,7 @@ function App() {
               <NewPuppyPage />
             </Route>
             <Route path='/puppies'>
-              <PuppyHistoryPage />
+              <PuppyListPage />
             </Route>
             <Redirect to='/puppies' />
           </Switch>

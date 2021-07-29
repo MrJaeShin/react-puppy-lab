@@ -9,7 +9,7 @@ function NavBar({ user, setUser }) {
 
   return (
     <nav>
-      <Link to="/puppies">Puppies History</Link>
+      <Link to="/puppies">All Puppies</Link>
       &nbsp; | &nbsp;
       <Link to="/puppies/new">New Puppy</Link>
       &nbsp; | &nbsp;

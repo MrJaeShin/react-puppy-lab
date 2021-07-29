@@ -1,6 +1,6 @@
 import * as usersService from '../../utilities/users-service';
 
-function PuppyHistoryPage(){
+function PuppyListPage(){
 
     async function handleCheckToken(){
         const expDate = await usersService.checkToken()
@@ -8,7 +8,7 @@ function PuppyHistoryPage(){
     }
     return (
     <>
-    <h1>PuppyHistoryPage</h1>  
+    <h1>PuppyListPage</h1>  
     <button onClick={handleCheckToken}>
         Check When My Login Expires
     </button>
@@ -17,4 +17,4 @@ function PuppyHistoryPage(){
 
 }
 
-export default PuppyHistoryPage;
+export default PuppyListPage;
