@@ -1,20 +1,22 @@
-import * as usersService from '../../utilities/users-service';
+import * as userService from '../../utilities/users-service';
+import PuppyList from '../../components/PuppyList/PuppyList';
+import './PuppyListPage.css';
 
-function PuppyListPage(){
 
-    async function handleCheckToken(){
-        const expDate = await usersService.checkToken()
+function PuppiesPage({puppies, setPuppies}) {
+    async function handleCheckToken() {
+        const expDate = await userService.checkToken();
         console.log(expDate);
     }
-    return (
-    <>
-    <h1>PuppyListPage</h1>  
-    <button onClick={handleCheckToken}>
-        Check When My Login Expires
-    </button>
-    </>
-    )
+    
 
+    return (
+        <div className="PuppyListPage-grid">
+            <h1>Puppies Page</h1>
+            <PuppyList puppies={puppies}/>
+            <button onClick={handleCheckToken}>Check When My Login Expires</button>
+        </div>
+    )
 }
 
-export default PuppyListPage;
+export default PuppiesPage
