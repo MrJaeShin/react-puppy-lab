@@ -1,34 +1,31 @@
-
-import { getToken } from './users-service';
-
 const BASE_URL = '/api/puppies';
 
-export function getAll() {
-	return sendRequest(BASE_URL);
-}
-
-export function getById(id) {
-	return sendRequest(`${BASE_URL}/${id}`);
-}
-
-
-async function sendRequest(url, method = 'GET', payload = null) {
-	const options = { method };
-	if (payload) {
-		options.headers = { 'Content-Type': 'application/json' };
-		options.body = JSON.stringify(payload);
-	}
-	const token = getToken();
-	console.log('token', token)
-	if (token) {
-		options.headers = options.headers || {};
-		options.headers.Authorization = `Bearer ${token}`;
-	}
-	const res = await fetch(url, options);
-	if (res.ok) return res.json();
-	throw new Error('Bad Request');
-}
-
 export function create(pup) {
-return sendRequest(BASE_URL,'POST', pup);
+    return fetch(`${BASE_URL}/new`, {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(pup)
+    }).then(res => res.json());
+}
+
+export function getAll() {
+    return fetch(BASE_URL, {
+        method: "GET",
+        header: { 'Content-Type': 'application/json' },
+        body: JSON.stringify()
+    }).then(res => res.json());
+}
+
+export function update(pup) {
+    return fetch(`${BASE_URL}/${pup._id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(pup),
+    }).then(res => res.json());
+}
+
+export function deleteOne(id) {
+    return fetch(`${BASE_URL}/${id}`, {
+        method: 'DELETE',
+    }).then(res => res.json());
 }

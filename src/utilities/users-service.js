@@ -1,4 +1,4 @@
-import * as usersAPI from './users-api';
+import * as usersAPI from "./users-api";
 
 export async function signUp(userData) {
 	try {
@@ -6,10 +6,9 @@ export async function signUp(userData) {
 		localStorage.setItem('token', token);
 		return getUser();
 	} catch {
-		throw new Error('Invalid Sign Up');
+		throw new Error("Invalid Sign Up");
 	}
 }
-
 
 export function getToken() {
 	const token = localStorage.getItem('token');
@@ -41,6 +40,6 @@ export async function login(credentials) {
 	}
 }
 
-export function checkToken(){
+export function checkToken() {
 	return usersAPI.checkToken().then(dateStr => new Date(dateStr));
 }

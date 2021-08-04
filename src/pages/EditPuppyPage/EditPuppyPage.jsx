@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import * as puppyAPI from "../../utilities/puppies-api";
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
 
-export default function AddPuppyPage({ puppies, setPuppies }) {
-  const [formData, setFormData] = useState({
-    name: "",
-    breed: "Mixed",
-    age: 0,
-  });
+export default function EditPuppyPage(props) {
+  const location = useLocation();
 
-  async function handleAddPuppy(newPupData) {
-    const newPup = await puppyAPI.create(newPupData);
-    setPuppies([...puppies, newPup]);
-  }
+  const [invalidForm, setValidForm] = useState(true);
+  const [formData, setFormData] = useState(location.state.puppy);
+
+  const formRef = useRef();
+
+  useEffect(() => {
+    formRef.current.checkValidity() ? setValidForm(false) : setValidForm(true);
+  }, [formData]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleAddPuppy(formData);
+    props.handleUpdatePuppy(formData);
   };
 
   const handleChange = (e) => {
@@ -27,10 +27,10 @@ export default function AddPuppyPage({ puppies, setPuppies }) {
 
   return (
     <>
-      <h1>Add Puppy</h1>
-      <form onSubmit={handleSubmit} autoComplete="off">
+      <h1>Edit Puppy</h1>
+      <form ref={formRef} autoComplete="off" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Pup's Name (Required)</label>
+          <label>Pup's Name (required)</label>
           <input
             className="form-control"
             name="name"
@@ -40,7 +40,7 @@ export default function AddPuppyPage({ puppies, setPuppies }) {
           />
         </div>
         <div className="form-group">
-          <label>Pup's Breed (Required)</label>
+          <label>Pup's Breed (required)</label>
           <input
             className="form-control"
             name="breed"
@@ -58,9 +58,11 @@ export default function AddPuppyPage({ puppies, setPuppies }) {
             onChange={handleChange}
           />
         </div>
-        <button type="submit" className="btn">
-          ADD PUPPY
+        <button type="submit" className="btn btn-xs" disabled={invalidForm}>
+          SAVE PUPPY
         </button>
+        &nbsp;&nbsp;
+        <Link to="/">CANCEL</Link>
       </form>
     </>
   );

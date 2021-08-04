@@ -1,24 +1,16 @@
-import * as usersService from '../../utilities/users-service';
-import PuppyList from '../../components/PuppyList/PuppyList'
+import React from "react";
+import { useLocation } from "react-router-dom";
+import PuppyCard from "../../components/PuppyCard/PuppyCard";
 
-function Puppies({ puppies }){
+export default function PuppyDetailPage(props) {
+  const {
+    state: { puppy },
+  } = useLocation();
 
-    async function handleCheckToken(){
-        const expDate = await usersService.checkToken()
-        console.log(expDate);
-    }
-    return (
+  return (
     <>
-    <h1>Puppies</h1>  
-    <div>
-        <PuppyList puppies={puppies}/>
-    </div>
-    <button onClick={handleCheckToken}>
-        Check When My Login Expires
-    </button>
+      <h1> Puppy Details </h1>
+      <PuppyCard puppy={puppy} key={puppy._id} />
     </>
-    )
-
+  );
 }
-
-export default Puppies;
